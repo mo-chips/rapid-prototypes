@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tshedza Learning Playground</title>
+  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+  <div id="app-container">
+    
+    <!-- Global Navbar (visible during games) -->
+    <div class="navbar" id="global-navbar" style="display: none;">
+      <div class="nav-btn" id="btn-back-home" title="Go back to Home">🏠</div>
+      <div class="game-title" id="navbar-title">Tshedza Playground</div>
+      <div class="nav-placeholder"></div>
+    </div>
+
+    <!-- 1. HOME SCREEN VIEW -->
+    <div class="view active" id="home-screen">
+      <div class="home-header">
+        <h1 class="brand-title">
+          <span class="brand-letter">T</span>
+          <span class="brand-letter">s</span>
+          <span class="brand-letter">h</span>
+          <span class="brand-letter">e</span>
+          <span class="brand-letter">d</span>
+          <span class="brand-letter">z</span>
+          <span class="brand-letter">a</span>
+        </h1>
+        <div class="brand-subtitle">Educational Playground 🎈</div>
+      </div>
+
+      <div class="activities-grid">
+        <!-- Card 1: Name Tracing -->
+        <div class="activity-card coral" id="card-name-tracing">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <path d="M20,70 Q40,40 80,40" stroke="var(--coral-red)" stroke-width="4" stroke-dasharray="6,6" fill="none" />
+            <circle cx="80" cy="40" r="4" fill="var(--coral-red)" />
+            <g transform="translate(45, 30) rotate(-45)">
+              <rect x="0" y="0" width="10" height="30" rx="2" fill="#ffb74d" stroke="#3a3222" stroke-width="3" />
+              <polygon points="0,0 10,0 5,-8" fill="#ff8a65" stroke="#3a3222" stroke-width="3" />
+              <circle cx="5" cy="-8" r="1.5" fill="#3a3222" />
+            </g>
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--coral-red);">Name Tracing</h2>
+            <p class="card-desc">Trace your name "Tshedza Mbengeni" step-by-step!</p>
+          </div>
+          <button class="card-btn">Start Tracing</button>
+        </div>
+
+        <!-- Card 2: Alphabet Academy -->
+        <div class="activity-card green" id="card-alphabet">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <rect x="15" y="45" width="34" height="34" rx="8" fill="var(--lime-green)" stroke="#3a3222" stroke-width="3" />
+            <text x="32" y="70" font-family="Fredoka" font-weight="bold" font-size="22" fill="white" text-anchor="middle">A</text>
+            <rect x="51" y="30" width="34" height="34" rx="8" fill="var(--sunny-orange)" stroke="#3a3222" stroke-width="3" />
+            <text x="68" y="55" font-family="Fredoka" font-weight="bold" font-size="22" fill="white" text-anchor="middle">b</text>
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--lime-green);">Alphabet Academy</h2>
+            <p class="card-desc">Trace letters in both Uppercase and Lowercase!</p>
+          </div>
+          <button class="card-btn">Let's Learn</button>
+        </div>
+
+        <!-- Card 3: Shape Safari -->
+        <div class="activity-card blue" id="card-shape">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <circle cx="35" cy="50" r="20" fill="none" stroke="var(--sky-blue)" stroke-width="5" stroke-dasharray="5,4" />
+            <polygon points="65,30 85,68 45,68" fill="none" stroke="var(--sunny-orange)" stroke-width="5" stroke-dasharray="5,4" />
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--sky-blue);">Shape Safari</h2>
+            <p class="card-desc">Learn to draw Circles, Squares, Triangles, Stars, and Hearts!</p>
+          </div>
+          <button class="card-btn">Explore Shapes</button>
+        </div>
+
+        <!-- Card 4: Balloon Pop Party -->
+        <div class="activity-card purple" id="card-balloon">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <circle cx="35" cy="40" r="18" fill="var(--lavender)" stroke="#3a3222" stroke-width="3" />
+            <path d="M35,58 L35,75" stroke="#3a3222" stroke-width="2" fill="none" />
+            <circle cx="65" cy="45" r="16" fill="var(--coral-red)" stroke="#3a3222" stroke-width="3" />
+            <path d="M65,61 L65,78" stroke="#3a3222" stroke-width="2" fill="none" />
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--lavender);">Balloon Pop Party</h2>
+            <p class="card-desc">Pop balloons to count and trigger massive confetti!</p>
+          </div>
+          <button class="card-btn">Join Party</button>
+        </div>
+
+        <!-- Card 5: Number Tracing -->
+        <div class="activity-card orange" id="card-number">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <rect x="15" y="15" width="70" height="70" rx="15" fill="none" stroke="var(--sunny-orange)" stroke-width="5" stroke-dasharray="6,4" />
+            <text x="50" y="65" font-family="Fredoka" font-weight="extrabold" font-size="52" fill="var(--sunny-orange)" text-anchor="middle">3</text>
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--sunny-orange);">Number Tracing</h2>
+            <p class="card-desc">Learn to write numbers 1 to 10 step-by-step!</p>
+          </div>
+          <button class="card-btn">Trace Numbers</button>
+        </div>
+
+        <!-- Card 6: Object Oasis -->
+        <div class="activity-card coral" id="card-objects">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <text x="35" y="50" font-size="40" text-anchor="middle">🍎</text>
+            <text x="65" y="75" font-size="40" text-anchor="middle">🚗</text>
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--coral-red);">Object Oasis</h2>
+            <p class="card-desc">Can you identify matching everyday items?</p>
+          </div>
+          <button class="card-btn">Find Objects</button>
+        </div>
+
+        <!-- Card 7: My Body -->
+        <div class="activity-card green" id="card-body">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <!-- A smiling child face vector -->
+            <circle cx="50" cy="50" r="30" fill="none" stroke="var(--lime-green)" stroke-width="5" />
+            <circle cx="40" cy="45" r="4" fill="#3a3222" />
+            <circle cx="60" cy="45" r="4" fill="#3a3222" />
+            <path d="M38,62 Q50,72 62,62" stroke="#3a3222" stroke-width="4" fill="none" stroke-linecap="round" />
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--lime-green);">My Body</h2>
+            <p class="card-desc">Identify eyes, nose, head, ears, hands, and feet!</p>
+          </div>
+          <button class="card-btn">Explore Body</button>
+        </div>
+
+        <!-- Card 8: Animal Safari -->
+        <div class="activity-card blue" id="card-animals">
+          <svg class="card-icon" viewBox="0 0 100 100">
+            <text x="30" y="60" font-size="42" text-anchor="middle">🦁</text>
+            <text x="70" y="60" font-size="42" text-anchor="middle">🐸</text>
+          </svg>
+          <div>
+            <h2 class="card-title" style="color: var(--sky-blue);">Animal Safari</h2>
+            <p class="card-desc">Tap animals to hear their cute noises and stories!</p>
+          </div>
+          <button class="card-btn">Meet Animals</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. NAME TRACING VIEW -->
+    <div class="view activity-view" id="name-tracing-screen">
+      <div class="card">
+        <div class="label" id="label">This is your name</div>
+        <div class="letters" id="letters"></div>
+        <canvas id="traceCanvas" class="trace-canvas" width="300" height="300"></canvas>
+        <div class="hint" id="hint">Draw to continue</div>
+      </div>
+    </div>
+
+    <!-- 3. ALPHABET ACADEMY VIEW -->
+    <div class="view activity-view" id="alphabet-screen">
+      <div class="card">
+        <div class="label" id="alpha-label">Select a letter to trace!</div>
+        
+        <!-- Letter Selector Grid -->
+        <div class="alphabet-grid" id="alphabet-selector"></div>
+
+        <canvas id="alphaCanvas" class="trace-canvas" width="300" height="300"></canvas>
+        <div class="hint" id="alpha-hint">Choose a letter to start</div>
+      </div>
+    </div>
+
+    <!-- 4. SHAPE SAFARI VIEW -->
+    <div class="view activity-view" id="shape-screen">
+      <div class="card">
+        <div class="label" id="shape-label">Select a shape to trace!</div>
+        
+        <!-- Shape Selectors -->
+        <div class="shape-selector-container" id="shape-selector">
+          <button class="shape-btn" data-shape="circle">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /></svg>
+            Circle
+          </button>
+          <button class="shape-btn" data-shape="square">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" /></svg>
+            Square
+          </button>
+          <button class="shape-btn" data-shape="triangle">
+            <svg viewBox="0 0 24 24"><polygon points="12,3 22,21 2,21" /></svg>
+            Triangle
+          </button>
+          <button class="shape-btn" data-shape="heart">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" /></svg>
+            Heart
+          </button>
+          <button class="shape-btn" data-shape="star">
+            <svg viewBox="0 0 24 24"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" /></svg>
+            Star
+          </button>
+        </div>
+
+        <canvas id="shapeCanvas" class="trace-canvas" width="300" height="300"></canvas>
+        <div class="hint" id="shape-hint">Choose a shape to start</div>
+      </div>
+    </div>
+
+    <!-- 5. BALLOON POP PARTY VIEW -->
+    <div class="view" id="balloon-pop-screen">
+      <!-- Floating Clouds Background -->
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+
+      <!-- Pop Scoreboard -->
+      <div class="pop-scoreboard">
+        Popped Balloons: <span id="pop-counter">0</span>
+      </div>
+
+      <!-- Popping Arena -->
+      <div class="balloon-arena" id="balloon-arena"></div>
+
+      <!-- Milestone Checkpoint Overlay -->
+      <div class="checkpoint-overlay" id="checkpoint-overlay" style="display: none;">
+        <div class="checkpoint-card">
+          <div class="checkpoint-icon">🏆</div>
+          <div class="checkpoint-num" id="checkpoint-num">5</div>
+          <div class="checkpoint-title" id="checkpoint-title">BALLOONS POPPED!</div>
+          <div class="checkpoint-subtitle">Awesome popping party! 🌟</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. NUMBER TRACING VIEW -->
+    <div class="view activity-view" id="number-screen">
+      <div class="card">
+        <div class="label" id="number-label">Select a number to trace!</div>
+        
+        <!-- Number Selector Grid -->
+        <div class="alphabet-grid" id="number-selector" style="grid-template-columns: repeat(5, 1fr); max-height: 120px;"></div>
+
+        <canvas id="numCanvas" class="trace-canvas" width="300" height="300"></canvas>
+        <div class="hint" id="number-hint">Choose a number to start</div>
+      </div>
+    </div>
+
+    <!-- 7. OBJECT OASIS VIEW -->
+    <div class="view activity-view" id="objects-screen">
+      <div class="card" style="max-width: 600px;">
+        <div class="label" id="object-question" style="color: var(--coral-red); font-size: 2.2rem; min-height: 3rem;">Can you find the Apple?</div>
+        
+        <!-- Objects layout selection grid -->
+        <div class="objects-grid" id="objects-grid"></div>
+        <div class="hint" id="object-hint">Tap the correct item!</div>
+      </div>
+    </div>
+
+    <!-- 8. MY BODY VIEW -->
+    <div class="view activity-view" id="body-screen">
+      <div class="card" style="max-width: 600px;">
+        <div class="label" id="body-question" style="color: var(--lime-green); font-size: 2.2rem; min-height: 3rem;">Can you find your Nose?</div>
+        
+        <!-- Body Parts Grid options -->
+        <div class="body-parts-grid" id="body-parts-grid"></div>
+        <div class="hint" id="body-hint">Tap the correct body part!</div>
+      </div>
+    </div>
+
+    <!-- 9. ANIMAL SAFARI VIEW -->
+    <div class="view activity-view" id="animals-screen">
+      <div class="card" style="max-width: 750px;">
+        <div class="label" style="color: var(--sky-blue); font-size: 2.2rem; margin-bottom: 24px;">Animal Sound Safari 🦁</div>
+        
+        <!-- Animal Selector Grid -->
+        <div class="animals-grid-layout" id="animals-grid-layout"></div>
+        <div class="hint" style="margin-top: 24px;">Tap an animal to hear its noise and details!</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/main.js?v=7"></script>
+</body>
+
+</html>

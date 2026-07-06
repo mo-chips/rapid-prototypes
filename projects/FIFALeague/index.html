@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIFA World Cup 2026 - Standing Log</title>
+  <meta name="description" content="Monitor the current 2026 FIFA World Cup standings in a unified single log. Tracking all 48 teams, group-stage progress, and the Round of 32 qualifiers.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-main">
+        <div class="logo-area">
+          <img src="trophy.png" alt="FIFA World Cup Trophy" class="logo-img">
+          <div class="title-group">
+            <h1>FIFA World Cup 2026</h1>
+            <p class="subtitle">Unified Group Standings & Live Monitor</p>
+          </div>
+        </div>
+        <div class="api-status" id="apiStatus">
+          <span class="status-dot warning"></span>
+          <span class="status-text">Connecting to Live Feed...</span>
+          <button id="btnRefreshCache" class="btn-refresh-cache" title="Force Refresh Live Feed">🔄</button>
+        </div>
+      </div>
+
+      <!-- Stats Banner -->
+      <div class="stats-banner">
+        <div class="stat-card">
+          <span class="stat-value" id="statMatches">0</span>
+          <span class="stat-label">Matches Played</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="statGoals">0</span>
+          <span class="stat-label">Total Goals</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="statAvgGoals">0.00</span>
+          <span class="stat-label">Goals / Match</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="statQualified">32 / 48</span>
+          <span class="stat-label">Teams Remaining</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="app-content">
+      <!-- Left Column: Standings -->
+      <section class="section-standings">
+        <div class="card-header-actions">
+          <div class="view-tabs">
+            <div class="tab-row">
+              <button class="btn-tab active" id="btnTabUnified" title="Show the combined single log standings of all 48 teams">Unified Log</button>
+              <button class="btn-tab" id="btnTabNormal" title="Show the traditional 12 group tables side-by-side">Group Stage</button>
+            </div>
+            <div class="tab-row">
+              <button class="btn-tab" id="btnTabKnockouts" title="Show the tournament knockout bracket">Knockouts</button>
+              <button class="btn-tab" id="btnTabStats" title="Show tournament statistics and leaders">Statistics</button>
+            </div>
+          </div>
+          <div class="toggle-container" id="sortToggleContainer">
+            <span class="toggle-label">Sort View:</span>
+            <div class="toggle-buttons">
+              <button class="btn-toggle active" id="btnSortRank" title="Sort by official tournament rank (1st place teams, then 2nd place, then 3rd, then 4th)">Tournament Rank</button>
+              <button class="btn-toggle" id="btnSortPure" title="Sort purely by points, goal difference, goals scored globally">Pure Global Sort</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filters Bar -->
+        <div class="filters-bar" id="filtersBar">
+          <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="teamSearch" placeholder="Search teams...">
+          </div>
+          <div class="filter-badges-container">
+            <div class="filter-group">
+              <button class="badge-filter active" data-filter="all">All Teams</button>
+              <button class="badge-filter" data-filter="qualified">Qualifiers</button>
+              <button class="badge-filter" data-filter="third-place">3rd Place Comp</button>
+              <button class="badge-filter" data-filter="eliminated">Eliminated</button>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Table Container -->
+        <div class="table-scroll-container" id="unifiedTableWrapper">
+          <table class="standings-table" id="standingsTable">
+            <thead>
+              <tr>
+                <th class="col-rank">#</th>
+                <th class="col-team">Team</th>
+                <th class="col-group">Grp</th>
+                <th class="col-num" title="Matches Played">MP</th>
+                <th class="col-num" title="Wins">W</th>
+                <th class="col-num" title="Draws">D</th>
+                <th class="col-num" title="Losses">L</th>
+                <th class="col-num" title="Goals For">GF</th>
+                <th class="col-num" title="Goals Against">GA</th>
+                <th class="col-num" title="Goal Difference">GD</th>
+                <th class="col-num col-pts" title="Points">PTS</th>
+                <th class="col-status">Status</th>
+              </tr>
+            </thead>
+            <tbody id="standingsBody">
+              <tr>
+                <td colspan="12" class="table-loading">Loading standings...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Legend (Mobile Only below Unified Table) -->
+        <div class="standings-legend mobile-only-legend">
+          <div class="legend-item"><span class="legend-color color-q-direct"></span> Top 2 (Auto-Qualify)</div>
+          <div class="legend-item"><span class="legend-color color-q-wildcard"></span> Best 8 Third-Place</div>
+          <div class="legend-item"><span class="legend-color color-eliminated"></span> Eliminated</div>
+        </div>
+
+        <!-- Normal View Layout Container -->
+        <div class="normal-view-layout" id="normalViewLayout" style="display: none;">
+          <div class="groups-grid-container" id="groupsGridContainer">
+            <!-- Dynamically populated group tables -->
+          </div>
+
+          <aside class="tournament-stats-sidebar" id="tournamentStatsSidebar">
+            <!-- Dynamically populated stats -->
+          </aside>
+        </div>
+        
+        <!-- Knockouts View Layout Container -->
+        <div class="knockouts-view-layout" id="knockoutsViewLayout" style="display: none;">
+          <!-- Dynamically populated bracket -->
+        </div>
+
+        <!-- Statistics View Layout Container -->
+        <div class="stats-view-layout" id="statsViewLayout" style="display: none;">
+          <div class="stats-view-column" id="statsLeadersContainer">
+            <!-- Dynamically populated leaders -->
+          </div>
+          <div class="stats-view-column">
+            <!-- Dynamically populated top goalscorers -->
+            <div id="statsGoalscorersContainer"></div>
+            <!-- Dynamically populated highest scoring groups -->
+            <div id="statsGroupsContainer"></div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- Right Column: Matches & Live Feed -->
+      <section class="section-matches">
+        <div class="matches-header">
+          <h2>Match Results</h2>
+          <div class="match-filters">
+            <select id="selectMatchday">
+              <option value="all">All Matchdays</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="matches-list-container" id="matchesList">
+          <div class="matches-loading">Loading matches...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Data provided by OpenFootball Community Data. World Cup 2026 is hosted in 🇨🇦 Canada, 🇲🇽 Mexico, and 🇺🇸 USA.</p>
+    </footer>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
