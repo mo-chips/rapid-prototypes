@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Wall</title>
+</head>
+
+<body>
+  <div id="root">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; width: 100vw; background-color: transparent; color: #10b981; font-family: system-ui, -apple-system, sans-serif;">
+      <div style="width: 48px; height: 48px; border: 4px solid rgba(16, 185, 129, 0.2); border-left-color: #10b981; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 24px;"></div>
+      <h2 style="margin: 0; font-size: 24px; font-weight: bold; color: #f4f4f5; letter-spacing: -0.025em;">The Wall</h2>
+      <p id="loading-label" style="margin: 8px 0 0 0; font-size: 14px; color: #71717a; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600;">Loading Workspace...</p>
+      <script>
+        var p = new URLSearchParams(location.search);
+        if (p.get('mini') === 'true') document.getElementById('loading-label').textContent = 'Loading Timer...';
+        else if (p.get('notification') === 'true') document.getElementById('loading-label').textContent = 'Loading...';
+      </script>
+      <style>
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        body { margin: 0; padding: 0; overflow: hidden; background-color: transparent; }
+      </style>
+    </div>
+  </div>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
