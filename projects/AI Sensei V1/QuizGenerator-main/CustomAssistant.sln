@@ -1,0 +1,68 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11217.181
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAssistant", "src\CustomAssistant\CustomAssistant.csproj", "{E7906AFC-2C9E-0488-F06F-7A9344EF3A41}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizGenerator.Core", "src\QuizGenerator.Core\QuizGenerator.Core.csproj", "{5CF0B7DB-1083-48AD-9F70-7C1DC232B93A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizGenerator.API", "src\QuizGenerator.API\QuizGenerator.API.csproj", "{CFFB53EA-94F7-41A0-9BFD-329A93CB2DD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuizGenerator.Tests", "src\QuizGenerator.Tests\QuizGenerator.Tests.csproj", "{9506E0EA-4B39-4644-B67D-0A413DCF8A63}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "QuizGenerator.Client", "src\QuizGenerator.Client\", "{4FD833AE-2559-E3D2-BDE5-6561E459AFA3}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_53632"
+		Debug.AspNetCompiler.PhysicalPath = "src\QuizGenerator.Client\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53632\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_53632"
+		Release.AspNetCompiler.PhysicalPath = "src\QuizGenerator.Client\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_53632\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "53632"
+		SlnRelativePath = "src\QuizGenerator.Client\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7906AFC-2C9E-0488-F06F-7A9344EF3A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7906AFC-2C9E-0488-F06F-7A9344EF3A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7906AFC-2C9E-0488-F06F-7A9344EF3A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7906AFC-2C9E-0488-F06F-7A9344EF3A41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CF0B7DB-1083-48AD-9F70-7C1DC232B93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CF0B7DB-1083-48AD-9F70-7C1DC232B93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CF0B7DB-1083-48AD-9F70-7C1DC232B93A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CF0B7DB-1083-48AD-9F70-7C1DC232B93A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFFB53EA-94F7-41A0-9BFD-329A93CB2DD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFFB53EA-94F7-41A0-9BFD-329A93CB2DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFFB53EA-94F7-41A0-9BFD-329A93CB2DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFFB53EA-94F7-41A0-9BFD-329A93CB2DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9506E0EA-4B39-4644-B67D-0A413DCF8A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9506E0EA-4B39-4644-B67D-0A413DCF8A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9506E0EA-4B39-4644-B67D-0A413DCF8A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9506E0EA-4B39-4644-B67D-0A413DCF8A63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FD833AE-2559-E3D2-BDE5-6561E459AFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD833AE-2559-E3D2-BDE5-6561E459AFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD833AE-2559-E3D2-BDE5-6561E459AFA3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD833AE-2559-E3D2-BDE5-6561E459AFA3}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58E02027-37CC-43BD-AEDC-73D7912CAF5E}
+	EndGlobalSection
+EndGlobal
