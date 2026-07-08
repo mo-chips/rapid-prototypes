@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tshedza-playground-v1';
+const CACHE_NAME = 'tshedza-playground-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

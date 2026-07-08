@@ -33,10 +33,10 @@ def get_local_ip():
 
 def start_server():
     # Allow the port to be reused immediately if the script is restarted
-    socketserver.TCPServer.allow_reuse_address = True
+    socketserver.ThreadingTCPServer.allow_reuse_address = True
     
     try:
-        with socketserver.TCPServer(("", PORT), NoCacheHandler) as httpd:
+        with socketserver.ThreadingTCPServer(("", PORT), NoCacheHandler) as httpd:
             local_ip = get_local_ip()
             
             print("\n" + "="*55)

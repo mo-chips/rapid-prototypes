@@ -4,7 +4,7 @@
  * ============================================================================
  */
 
-import { speak, loadVoice } from './voice.js';
+import { speak, stopSpeech } from './voice.js';
 import { setupNameTracing, cleanupNameTracing } from './games/name-tracing.js';
 import { setupAlphabetAcademy, cleanupAlphabetAcademy } from './games/alphabet-academy.js';
 import { setupShapeSafari, cleanupShapeSafari } from './games/shape-safari.js';
@@ -32,7 +32,7 @@ const viewIds = [
  */
 function switchView(activeViewId) {
   // Stop sounds and Speech
-  window.speechSynthesis.cancel();
+  stopSpeech();
   
   // Cleanup game scripts
   cleanupActiveGame();
@@ -131,13 +131,3 @@ const welcomeTrigger = () => {
 window.addEventListener("click", welcomeTrigger);
 window.addEventListener("touchstart", welcomeTrigger, { passive: true });
 
-// ============================================================================
-// REGISTER PWA SERVICE WORKER
-// ============================================================================
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js')
-      .then((reg) => console.log('[PWA] Service Worker registered successfully: ', reg.scope))
-      .catch((err) => console.error('[PWA] Service Worker registration failed: ', err));
-  });
-}

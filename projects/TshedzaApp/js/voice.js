@@ -4,7 +4,6 @@
  * ============================================================================
  */
 
-let voice = null;
 let activeAudio = null;
 
 // Clean text normalization mapping
@@ -159,8 +158,7 @@ for (let char of letters) {
 }
 
 /**
- * Speaks text, prioritizing pre-recorded expressive studio MP3 files.
- * Falls back seamlessly to browser speechSynthesis if assets are missing.
+ * Speaks text using pre-recorded expressive studio MP3 files.
  * @param {string|null} text - The text to speak.
  */
 export function speak(text) {
@@ -180,46 +178,23 @@ export function speak(text) {
     activeAudio = new Audio(audioPath);
 
     activeAudio.onerror = () => {
-      console.warn(`[Audio] Asset not found: ${audioPath}. Falling back to browser SpeechSynthesis.`);
-      runBrowserTTS(text);
+      console.warn(`[Audio] Asset not found: ${audioPath}`);
     };
 
     activeAudio.play().catch((err) => {
-      console.warn(`[Audio] Autoplay blocked or failed on ${audioPath}. Falling back to browser SpeechSynthesis.`, err);
-      runBrowserTTS(text);
+      console.warn(`[Audio] Autoplay blocked or failed on ${audioPath}`, err);
     });
-    return;
+  } else {
+    console.warn(`[Audio] No audio mapping found for text: "${text}"`);
   }
-
-  // Fallback to SAPI5 browser TTS if key is not indexed
-  runBrowserTTS(text);
 }
 
 /**
- * Run browser local Text-to-Speech synthesis.
+ * Stops any currently playing audio.
  */
-function runBrowserTTS(text) {
-  if (!("speechSynthesis" in window)) return;
-
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.rate = 0.75;
-  utterance.pitch = 2.15;
-  if (voice) utterance.voice = voice;
-  window.speechSynthesis.speak(utterance);
+export function stopSpeech() {
+  if (activeAudio) {
+    activeAudio.pause();
+    activeAudio = null;
+  }
 }
-
-/**
- * Load available browser local fallback voices.
- */
-export function loadVoice() {
-  const voices = window.speechSynthesis.getVoices();
-  voice = voices.find(v => /en/i.test(v.lang) && (/female/i.test(v.name) || /zira/i.test(v.name) || /samantha/i.test(v.name)))
-    || voices.find(v => /en/i.test(v.lang) && !/male/i.test(v.name))
-    || voices.find(v => /en/i.test(v.lang))
-    || voices[0] || null;
-}
-
-// Register browser TTS loading
-window.speechSynthesis.onvoiceschanged = loadVoice;
-loadVoice();
