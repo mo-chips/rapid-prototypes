@@ -1479,6 +1479,13 @@ h2 {
   max-width: 100%;
   width: 100%;
   box-sizing: border-box;
+  cursor: grab;
+}
+
+.knockouts-view-layout.active-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  user-select: none;
 }
 
 .knockouts-view-layout::-webkit-scrollbar {

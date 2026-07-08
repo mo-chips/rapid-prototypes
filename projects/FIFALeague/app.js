@@ -698,13 +698,17 @@ function updateApiStatus(type, text) {
 // ----------------------------------------------------
 function processOpenFootballData(openMatches) {
   matches = openMatches.map((m, idx) => {
+    const t1 = normalizeTeamName(m.team1);
+    const t2 = normalizeTeamName(m.team2);
     return {
       matchNum: idx + 1,
       round: m.round,
       date: m.date,
       time: m.time,
-      team1: normalizeTeamName(m.team1),
-      team2: normalizeTeamName(m.team2),
+      team1: t1,
+      team2: t2,
+      origTeam1: t1,
+      origTeam2: t2,
       score: m.score ? { ft: m.score.ft, et: m.score.et, p: m.score.p } : null,
       group: m.group,
       ground: m.ground,
@@ -767,8 +771,8 @@ function calculateStandingsFromMatches() {
   
   // Accumulate standings based on match scores
   matches.forEach(match => {
-    const t1 = match.team1;
-    const t2 = match.team2;
+    const t1 = match.origTeam1 || match.team1;
+    const t2 = match.origTeam2 || match.team2;
     
     if (!teamStats[t1] || !teamStats[t2]) return; // Skip if unrecognized teams
     if (!match.score || !match.score.ft) return; // Skip unplayed matches
@@ -1917,6 +1921,39 @@ function setupUIEventListeners() {
         btnRefreshCache.style.transform = '';
         btnRefreshCache.style.transition = 'transform 0.2s ease-in-out';
       }, 500);
+    });
+  }
+
+  // Drag scroll for Knockout Bracket
+  const knockoutsLayout = document.getElementById('knockoutsViewLayout');
+  if (knockoutsLayout) {
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    knockoutsLayout.addEventListener('mousedown', (e) => {
+      isDown = true;
+      knockoutsLayout.classList.add('active-dragging');
+      startX = e.pageX - knockoutsLayout.offsetLeft;
+      scrollLeft = knockoutsLayout.scrollLeft;
+    });
+    
+    knockoutsLayout.addEventListener('mouseleave', () => {
+      isDown = false;
+      knockoutsLayout.classList.remove('active-dragging');
+    });
+    
+    knockoutsLayout.addEventListener('mouseup', () => {
+      isDown = false;
+      knockoutsLayout.classList.remove('active-dragging');
+    });
+    
+    knockoutsLayout.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - knockoutsLayout.offsetLeft;
+      const walk = (x - startX) * 1.5; // scroll speed multiplier
+      knockoutsLayout.scrollLeft = scrollLeft - walk;
     });
   }
 }
